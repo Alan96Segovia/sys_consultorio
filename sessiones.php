@@ -42,17 +42,17 @@ $execute = pg_query($conexion, $query);
     include('panel_lateral.php')
     ?>
     <div class="content-wrapper">
-      <!-- Content Header (Page header) 
+      <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Pacientes</h1>
+              <h1 class="m-0">#</h1>
             </div>
           </div>
           
         </div>
-      </div>-->
+      </div>
       <!-- /.content-header -->
 
       <!-- Main content -->

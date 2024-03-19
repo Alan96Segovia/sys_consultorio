@@ -42,7 +42,6 @@ $execute = pg_query($conexion,$query);
     include('panel_lateral.php')
     ?>
     <div class="content-wrapper">
-      <!-- Content Header (Page header) 
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -52,7 +51,7 @@ $execute = pg_query($conexion,$query);
           </div>
           
         </div>
-      </div>-->
+      </div>
       <!-- /.content-header -->
 
       <!-- Main content -->
