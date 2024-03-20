@@ -72,8 +72,7 @@
 
             <div class="col">
               <label for="Editestado" class="form-label">Estado</label>
-              <select class="form-control" name="Editestado" id="Editestado">
-                    <option value="">Elegir Estado</option>
+              <select class="form-control" name="Editestado" id="Editestado" require>
                     <?php 
                     $q_estado = 'select * from estados where estado_id in (5,6)';
                     $execute_estado = pg_query($conexion,$q_estado);
@@ -82,6 +81,7 @@
                     <option value="<?php echo $row_estado['estado_id'] ?>"><?php echo $row_estado['estado_nombre'] ?></option>
                     <?php } ?>
               </select>
+              
 
             </div>
           </div>

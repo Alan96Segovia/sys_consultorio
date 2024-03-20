@@ -46,7 +46,7 @@ $execute = pg_query($conexion,$query);
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Pacientes</h1>
+              <h1 class="m-0">#</h1>
             </div>
           </div>
           

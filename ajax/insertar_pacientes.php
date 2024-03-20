@@ -18,7 +18,7 @@ $consulta = $_POST['consulta'];
  $query = "INSERT INTO pacientes
 (paciente_fecha,paciente_ci,paciente_nombre,paciente_apellido,paciente_fechanac,paciente_celular,paciente_correo,paciente_consulta,
 contacto_familiar,estado_id)
-VALUES ('$fecha_ing','$cedula','$nombres','$apellidos','$fecha_nac','$p_contacto','$correo','$consulta','$t_contacto',5);";
+VALUES ('$fecha_ing',TRIM('$cedula'),'$nombres','$apellidos','$fecha_nac','$p_contacto','$correo','$consulta','$t_contacto',5);";
 
 //ejecuto la consulta
 $execute_insert = pg_query($conexion, $query);

@@ -21,7 +21,7 @@ $query_update = "UPDATE
 public.pacientes 
 SET 
 paciente_fecha = '$fecha_ing',
-paciente_ci = '$cedula',
+paciente_ci =TRIM('$cedula'),
 paciente_nombre = '$nombres',
 paciente_apellido = '$apellidos',
 paciente_fechanac = '$fecha_nac',
