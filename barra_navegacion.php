@@ -20,7 +20,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <a class="dropdown-item" href="reporte_mensual_anual_primera_consulta.php" target="_blank">Reporte mensual y anual de la primera consulta.</a>
     <a class="dropdown-item" href="reporte_por_profesional.php" target="_blank">Reporte de Pacientes Por Profesional</a>
-    <a class="dropdown-item" href="reporte_pagos_mensual.php" target="_blank">Reporte Mensual de Pagos</a>
+    <a class="dropdown-item" href="reporte_pagos_mensual.php" target="_blank">Reporte Mensual de Pagos - Plan de Tratamientos</a>
   </div>
 </div>
 

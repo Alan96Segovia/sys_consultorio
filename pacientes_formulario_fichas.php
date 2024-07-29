@@ -7,16 +7,18 @@
         </div>
 
         <div class="modal-body">
-            <div class="progress"> <!--  barra de progreso-->
+            <!--  barra de progreso-->
+            <!-- <div class="progress"> 
                 <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
                 </div>
-            </div> <!-- fin barra de progreso -->
-
+            </div>  -->
+<!-- fin barra de progreso -->
             <!-- Contenedor para mensajes -->
             <div id="mensajesContainer"></div>
             <form id="formularioFicha" autocomplete="off">
-                <!--Aca empieza el paso uno  -->
-                <div id="step1">
+                <!--Aca empieza el paso uno  
+                <div id="step1"> -->
+                
                     <!--Agrego campos para el paso 1 -->
                     <div class="row">
                         <div class="col-md-6">
@@ -52,15 +54,15 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-primary next-step">Siguiente</button>
+                    <!-- <button type="button" class="btn btn-primary next-step">Siguiente</button>
                     <p>
                     <span class="h6">Seguir Completando Ficha</span>
-                    </p>
+                    </p> -->
                     <!--fin donde agrego  campos para el paso 1 -->
-                </div>
+                <!-- </div> -->
                 <!-- fin del paso uno -->
                 <!--Aca empieza el paso dos  -->
-                <div id="step2" style="display: none;">
+                <!-- <div id="step2" style="display: none;"> -->
                     <!--Agrego campos para el paso 2 -->
                     <div class="row mb-3">
                         <div class="col">
@@ -94,13 +96,13 @@
                             <textarea name="AEA" id="AEA" class="form-control" placeholder="Escribir..."></textarea>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success prev-step">Volver</button>
-                    <button type="button" class="btn btn-primary next-step">Siguiente</button>
+                    <!-- <button type="button" class="btn btn-success prev-step">Volver</button>
+                    <button type="button" class="btn btn-primary next-step">Siguiente</button> -->
                     <!--fin donde agrego  campos para el paso 2 -->
-                </div>
+                <!-- </div> -->
                 <!-- fin del paso dos -->
                 <!--Aca empieza el paso tres  -->
-                <div id="step3" style="display: none;">
+                <!-- <div id="step3" style="display: none;"> -->
                     <!--Agrego campos para el paso 3 -->
                     <div class="row mb-3">
                         <div class="col">
@@ -134,13 +136,13 @@
                             <textarea name="dolor" id="dolor" class="form-control" placeholder="Escribir..."></textarea>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success prev-step">Volver</button>
-                    <button type="button" class="btn btn-primary next-step">Siguiente</button>
+                    <!-- <button type="button" class="btn btn-success prev-step">Volver</button>
+                    <button type="button" class="btn btn-primary next-step">Siguiente</button> -->
                     <!--fin donde agrego  campos para el paso 3-->
-                </div>
+                <!-- </div> -->
                 <!-- fin del paso tres -->
                 <!--Aca empieza el paso cuatro  -->
-                <div id="step4" style="display: none;">
+                <!-- <div id="step4" style="display: none;"> -->
                     <!--Agrego campos para el paso 4 -->
                     <div class="row mb-3">
                         <div class="col">
@@ -166,13 +168,13 @@
                             <textarea name="factores_e" id="factores_e" class="form-control" placeholder="Escribir..."></textarea>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success prev-step">Volver</button>
-                    <button type="button" class="btn btn-primary next-step">Siguiente</button>
+                    <!-- <button type="button" class="btn btn-success prev-step">Volver</button>
+                    <button type="button" class="btn btn-primary next-step">Siguiente</button> -->
                     <!--fin donde agrego  campos para el paso 4-->
-                </div>
+                <!-- </div> -->
                 <!-- fin del paso cuatro -->
                 <!--Aca empieza el paso cinco  -->
-                <div id="step5" style="display: none;">
+                <!-- <div id="step5" style="display: none;"> -->
                     <!--Agrego campos para el paso 5 -->
                     <div class="row mb-3">
                         <div class="col">
@@ -214,9 +216,9 @@
                             <textarea name="diagnostico" id="diagnostico" class="form-control" placeholder="Escribir..."></textarea>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success prev-step">Volver</button>
+                    <!-- <button type="button" class="btn btn-success prev-step">Volver</button> -->
                     <!--fin donde agrego  campos para el paso 5-->
-                </div>
+                <!-- </div> -->
                 <!-- fin del paso cinco -->
 
         </div>

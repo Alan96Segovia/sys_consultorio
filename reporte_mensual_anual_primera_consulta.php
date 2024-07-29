@@ -119,7 +119,7 @@ if (!isset($_SESSION['usuario_id'])) {
                         $execute_query = pg_query($conexion, $query_view_consultas);
 
                         $cant = pg_num_rows($execute_query);
-
+                        $total;
                         if ($cant > 0) { //si hay cantidad de resultados muestro la tabla 
 
                     ?>
@@ -142,7 +142,9 @@ if (!isset($_SESSION['usuario_id'])) {
                                     <tbody>
                                         <?php
                                         $i = 1;
-                                        while ($fila = pg_fetch_array($execute_query)) { ?>
+                                        while ($fila = pg_fetch_array($execute_query)) { 
+                                            $total = $total + $fila['monto_consulta'];
+                                            ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
                                                 <td><?php echo $fila['paciente_ci']; ?></td>
@@ -154,6 +156,10 @@ if (!isset($_SESSION['usuario_id'])) {
                                             </tr>
                                         <?php } //cierro mi ciclo while 
                                         ?>
+                                        <tr>
+                                            <td colspan="6" class="text-right">TOTAL</td>
+                                            <td><?php echo $total; ?></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             <?php } else { //cierro if donde pregunto por la cantidad 

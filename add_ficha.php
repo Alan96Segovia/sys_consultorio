@@ -53,8 +53,8 @@ if(!isset($_SESSION['usuario_id'])){
     <script src="js/buscar_pacientes_consultas.js"></script>
     <!-- termina script buscar paciente por medio de js -->
     
-    <!--el arhivo form step configura el formulario que sea paso por paso y donde realizo el insert -->
-    <script src="js/form_step.js"></script>
+    <!--el arhivo form step configura el formulario que sea paso por paso y donde realizo el insert 
+    <script src="js/form_step.js"></script>-->
     
 </body>
 

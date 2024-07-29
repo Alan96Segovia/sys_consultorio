@@ -130,7 +130,7 @@ $excute_query_fichas = pg_query($conexion, $query_fichas);
                                                     } else {
                                                         echo 'bg-warning';
                                                     } ?>">
-                                        <td><?php echo $row_fichas['ficha_nro'] ?></td>
+                                        <td><a target="_blank" style="text-decoration: none;color:black;" href="ficha_paciente.php?id=<?php echo $row_fichas['ficha_id'] ?>"> <?php echo $row_fichas['ficha_nro'] ?></a></td>
                                         <td><?php echo $row_fichas['nro_ci'] ?></td>
                                         <td><?php echo $row_fichas['nombre'] . ' ' . $row_fichas['apellido'] ?></td>
                                         <td><?php echo $row_fichas['motivo_consulta'] ?></td>
