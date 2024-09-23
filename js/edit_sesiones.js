@@ -95,6 +95,7 @@ function obtenerDetalles() {
 
 function actualizarDetalles() {
     // Obtén los datos de los detalles
+    //console.log('hola')
     var detalles = obtenerDetalles();
 
     // Realiza la petición AJAX para actualizar los detalles
@@ -104,11 +105,11 @@ function actualizarDetalles() {
         data: { detalles: JSON.stringify(detalles) },
         success: function(detallesResponse) {
             // Maneja la respuesta del servidor para la actualización de detalles
-            if (detallesResponse.trim() === 'OK') {
+            if (detallesResponse.trim() === 'success') {
                 // Muestra un mensaje de éxito con SweetAlert
                 Swal.fire({
                     icon: 'success',
-                    title: 'Éxito',
+                    title: 'Exito',
                     text: 'Registro Actualizado Correctamente',
                     showConfirmButton: true,
                     timer: 3000

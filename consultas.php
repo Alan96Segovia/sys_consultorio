@@ -14,9 +14,22 @@ if(!isset($_SESSION['usuario_id'])){
 
 
 /*traigo todos los pacientes*/
-$query = "SELECT * 
-FROM view_consultas
-ORDER BY paciente_id ";
+$query = "SELECT 
+  consulta_id,
+  paciente_id,
+  fecha_consulta,
+  consulta_motivo,
+  monto_consulta,
+  nombre_paciente,
+  cedula,
+  fecha_nacimiento,
+  edad,
+  correo,
+  contacto_familiar,
+  estado_id
+FROM 
+  view_pacientes
+order by consulta_id ";
 $execute = pg_query($conexion,$query);
 ?>
 <!DOCTYPE html>
@@ -97,7 +110,7 @@ $execute = pg_query($conexion,$query);
                 <th>Nro</th>
                 <th>C.I</th>
                 <th>Datos Personales</th>
-                <th>Fecha Consulta</th>
+                <th>Edad</th>
                 <th>Motivo de Consulta</th>
                 <th>Monto</th>
                 <th>Opciones</th>
@@ -111,9 +124,9 @@ $execute = pg_query($conexion,$query);
               ?>
                 <tr class="h6">
                   <td><?php echo $i++ ?></td>
-                  <td><?php echo $row_pacientes['paciente_ci'] ?></td>
-                  <td><?php echo $row_pacientes['nombres'] ?></td>
-                  <td><?php echo date('d/m/Y', strtotime($row_pacientes['fecha_consulta'])) ?></td>
+                  <td><?php echo $row_pacientes['cedula'] ?></td>
+                  <td><?php echo $row_pacientes['nombre_paciente'] ?></td>
+                  <td><?php echo $row_pacientes['edad'] ?></td>
                   <td><?php echo $row_pacientes['consulta_motivo'] ?></td>
                   <td><?php echo number_format( $row_pacientes['monto_consulta'],0,',','.') ?></td>
                   <td>
@@ -150,7 +163,7 @@ $execute = pg_query($conexion,$query);
   <!--termino de adjuntar scripts jquery y js -->
 
 <!-- Agrego mi scrip para buscar paciente por medio de js-->
-<script src="js/buscar_pacientes.js"></script>
+<!-- <script src="js/buscar_pacientes.js"></script> -->
   <!-- termina script buscar paciente por medio de js -->
 
   <!-- Agrego mi scrip para agregr consulta por medio de js-->

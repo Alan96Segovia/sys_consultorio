@@ -1,4 +1,6 @@
 <?php
+//phpinfo(); 
+
 include('clases/conexion.php');
 //inicio o reanudo la session 
 session_start();
@@ -47,7 +49,7 @@ while ($row_fichas = pg_fetch_array($excute_query_fichas)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <title>Ficha Paciente- </title>
+    <title>Ficha Paciente- <?php echo $nombre.'_'.$apellido?> </title>
     <style>
         table,tr,td{
             border: 1px solid !important;
@@ -152,5 +154,6 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A4');
 $dompdf->render();
 
-$dompdf->stream("ficha.pdf", array("Attachment" => false));
+//$dompdf->stream("ficha_.pdf", array("Attachment" => false));
+$dompdf->stream("ficha_'$nombre'_'$apellido'.pdf", array("Attachment" => false));
 ?>

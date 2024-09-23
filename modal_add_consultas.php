@@ -28,8 +28,20 @@
               <label for="nombres" class="form-label">
                 Datos del Pacientes
               </label>
-              <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Escribir nombre del paciente" readonly>
-              <input type="hidden" class="form-control" name="id" id="idp">
+              <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Escribir nombre del paciente" require>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="correo" class="form-label">
+                Correo Electronico
+              </label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Ingresar Correo del paciente" require>
+            </div>
+            
+            <div class="col">
+              <label for="contacto_familiar" class="form-label">Contacto Familiar</label>
+              <input type="text" class="form-control" name="contacto_familiar" id="contacto_familiar" placeholder="Contacto Familiar" require>
             </div>
           </div>
           <div class="row mb-3">
@@ -37,11 +49,12 @@
               <label for="fecha_nac" class="form-label">
                 Fecha Nacimiento
               </label>
-              <input type="text" class="form-control" name="fecha_nac" id="fecha_nac" readonly>
+              <input type="date" class="form-control" name="fecha_nac" id="fecha_nac" require>
             </div>
+
             <div class="col">
               <label for="consulta" class="form-label">Motivo Consulta</label>
-              <textarea name="consulta" id="consulta" class="form-control" rows="3" placeholder="Escriba aqui.." ></textarea>
+              <textarea name="consulta" id="consulta" class="form-control" rows="3" placeholder="Escriba aqui.." require></textarea>
             </div>
           </div>
           <div class="row mb-3">
@@ -55,6 +68,13 @@
               <label for="monto" class="form-label">Monto Consulta</label>
               <input type="number" min='0' class="form-control" name="monto" id="monto" placeholder="Monto de Consulta" value="150000">
             </div>
+          </div>
+          <div class="row mb-6">
+              <div class="col">
+              <label for="obs" class="form-label">Observacion Consulta</label>
+              <input type="text"  class="form-control" name="obs" id="obs" placeholder="Escribir Alguna Observacion">
+            
+              </div>
           </div>
 
         </form>

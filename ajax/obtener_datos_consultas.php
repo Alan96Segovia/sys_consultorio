@@ -6,7 +6,7 @@ include('../clases/conexion.php');
 $consulta_id = $_POST['consulta_id'];
 //echo 'consultaid'. $consulta_id;
 //sql para traer los datos del paciente
-$query = "Select * from view_consultas where consulta_id = $consulta_id";
+$query = "Select * from view_pacientes where consulta_id = $consulta_id";
 //echo $query;
 //ejecutamos el query
 $execute_query = pg_query($conexion, $query);
@@ -25,4 +25,4 @@ if($execute_query){
 }
 
 //cierro la conexion si es necesario
-pg_close($conexion);
+//pg_close($conexion);

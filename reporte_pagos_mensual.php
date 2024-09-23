@@ -108,8 +108,8 @@ if (!isset($_SESSION['usuario_id'])) {
 
                         $query;
 
-                        if(empty($mes) and empty($year)){
-                            $query = "SELECT * FROM view_rpt_mensual_pagos  ORDER BY mes, ejercicio";
+                        if(empty($mes)){
+                             $query = "SELECT * FROM view_rpt_mensual_pagos  ORDER BY mes, ejercicio";
                         }else{
                             $query = "SELECT * FROM view_rpt_mensual_pagos WHERE mes= '$mes' and ejercicio = '$year'   ORDER BY mes, ejercicio";
 

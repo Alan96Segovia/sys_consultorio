@@ -1,7 +1,7 @@
 //$(document).ready(function() {
     $(document).on("click", ".btn-editar", function () {
         var consulta_id = $(this).data("id");
-        //alert(consulta_id);
+        //alert(observacion);
         // Realiza una llamada Ajax para obtener los datos del paciente
         $.ajax({
           url: "ajax/obtener_datos_consultas.php", // Reemplaza con la ruta correcta a tu script PHP
@@ -9,14 +9,21 @@
           data: { consulta_id: consulta_id },
           dataType: "json",
           success: function (data) {
-            console.log("muestro resultado: " + data);
+            //console.log("muestro resultado: " + data);
             // Llena los campos del modal con los datos del paciente
-            $("#Editcedula").val(data.paciente_ci);
-            //$("#edit_nombres").val(data.paciente_nombre);
+
+            $("#Editcedula").val(data.cedula);
+            $("#edit_nombres").val(data.nombre_paciente);
             $("#Editfecha_cons").val(data.fecha_consulta);
             $("#Editconsulta").val(data.consulta_motivo);
             $("#Editmonto").val(data.monto_consulta);
             $("#EditPaciente_id").val(data.paciente_id);
+            $("#Editcorreo").val(data.correo);
+            $("#EditcontactoFamiliar").val(data.contacto_familiar);
+            $("#observacion").val(data.paciente_obs);
+            var fechaNacimiento = data.fecha_nacimiento.replace(/-/g, '/'); // Reemplaza todos los guiones por barras
+
+            $("#Editfecha_nac").val(fechaNacimiento);
             
       
             // Establece el ID del paciente en un campo oculto
@@ -41,19 +48,24 @@
       
         //var pacienteId = $(this).data('data-paceinte-id');
         var consulta_id = $("#editConsultaId").val();
+        //var observacion = $("#observacion").val();
         //alert(pacienteId);
-      
+      console.log(observacion)
         ///llamada a ajax para guardar cambios
         $.ajax({
           url:'ajax/guardar_cambios_consultas.php',
           method:'POST',
           data:{
             consulta_id :consulta_id,
-            cedula:$('#Editcedula').val(),
-            paciente_id:$('#EditPaciente_id').val(),
-            fecha_consulta:$('#Editfecha_cons').val(),
             consulta_motivo:$('#Editconsulta').val(),
-            monto_consulta:$('#Editmonto').val()
+            monto_consulta:$('#Editmonto').val(),
+            paciente_nombres_apellidos: $('#edit_nombres').val(),
+            paciente_cedula:$('#Editcedula').val(),
+            paciente_fecha_nac:$('#Editfecha_nac').val(),
+            paciente_correo:$('#Editcorreo').val(),
+            paciente_contacto_familiar:$('#EditcontactoFamiliar').val(),
+            paciente_obs:$('#observacion').val()
+            
           },
           success:function(response){
             //capturo mensaje de exito o de error

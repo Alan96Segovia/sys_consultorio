@@ -13,6 +13,7 @@
             <small><?php echo  $_SESSION['nombre_usuario']; ?></small>
           </a> 
       </div>
+      
     </div>
 
     <!-- SidebarSearch Form 
@@ -38,10 +39,10 @@
             <i class="fas fa-user-md"></i>
             <p><small>Profesionales</small> </p>
           </a> </li>
-        <li class="nav-item"> <a href="pacientes.php" class="nav-link">
+        <!-- <li class="nav-item"> <a href="pacientes.php" class="nav-link">
             <i class="fas fa-restroom"></i>
             <p><small>Registros de Pacientes </small></p>
-          </a> </li>
+          </a> </li> -->
         <li class="nav-item"> <a href="consultas.php" class="nav-link">
             <i class="fas fa-user-md"></i>
             <p><small>Registro de Primera Consulta </small></p>
@@ -74,6 +75,10 @@
           <li class="nav-item"> <a href="pacientes_planes.php" class="nav-link">
           <i class="fas fa-running"></i>
             <p><small>Planes</small> </p>
+          </a> </li>
+          <li class="nav-item"> <a href="cerrar_sesion.php" class="nav-link">
+          <i class="fas fa-sign-out-alt"></i>
+            <p><small>Cerrar Session</small> </p>
           </a> </li>
       </ul>
     </nav>

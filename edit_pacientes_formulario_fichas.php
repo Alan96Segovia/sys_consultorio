@@ -60,11 +60,11 @@ while($datos_ficha = pg_fetch_array($execute_query)){
                             <input type="text" class="form-control col-md-2" name="EditnroFicha" id="EditnroFicha" value="<?php echo $ficha_nro ?>" readonly>
                             <input type="hidden"  name="Editid" id="Editid" value="<?php echo $ficha_id ?>" readonly>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <label for="EditfechaFicha" class="form-label">Fecha Ficha</label>
                             <input type="text" name="EditfechaFicha" id="EditfechaFicha" class="form-control" value="<?php echo date('d/m/Y',strtotime($ficha_fecha));  ?>" >
                             <span style="font-size: 12px;font-weight: bold;">Formato de fecha -> dia/mes/año</span>
-                        </div>
+                        </div> -->
                         <div class="col-md-4">
                             <label for="Editestado_id" class="form-label">Estado</label>
                             <select class="form-control" name="Editestado_id" id="Editestado_id" require>
@@ -72,9 +72,12 @@ while($datos_ficha = pg_fetch_array($execute_query)){
                                     <?php 
                                     $q_estado = 'select * from estados where estado_id in (5,6)';
                                     $execute_estado = pg_query($conexion,$q_estado);
-                                    while($row_estado = pg_fetch_array($execute_estado)){
+                                    while ($row_estado = pg_fetch_array($execute_estado)) {
+                                        $selected = ($row_estado['estado_id'] == 5) ? 'selected' : '';
                                     ?>
-                                    <option value="<?php echo $row_estado['estado_id'] ?>"><?php echo $row_estado['estado_nombre'] ?></option>
+                                        <option value="<?php echo $row_estado['estado_id']; ?>" <?php echo $selected; ?>>
+                                            <?php echo $row_estado['estado_nombre']; ?>
+                                        </option>
                                     <?php } ?>
                             </select>
                         </div>    

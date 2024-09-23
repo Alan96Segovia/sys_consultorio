@@ -29,7 +29,7 @@ tipo_pago_id = $tipo_pago_id
 WHERE 
 paciente_sessionid = $paciente_sessionid;";
 
-$execute_query = pg_query($conexion,$query_update);
+ $execute_query = pg_query($conexion,$query_update);
 
 // Verifica si la actualización fue exitosa
 /*if ($execute_query) {

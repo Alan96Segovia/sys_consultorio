@@ -206,8 +206,11 @@ $execute_control_sesiones = pg_query($conexion,$control_sesiones);
                                     
                                 </div>
                             </div>
-
-
+                            <div class="row mb-3">
+                                <div class="col-2">
+                                    <a class="btn btn-block btn-warning btn-lg" href="sessiones.php" role="button">Atras</a>
+                                </div>
+                            </div>
                             <!-- Campo oculto para la cantidad de detalles -->
                             <input type="hidden" id="cantidadDetalles" name="cantidadDetalles" data-cantidad="">
                             <!-- Botón para agregar detalles -->

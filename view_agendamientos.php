@@ -17,6 +17,7 @@ while ($fila = pg_fetch_array($execute_query)) {
 
     $eventos[] = array(
         'id_cabecera' => $fila['id_cabecera'],
+        'id_detalle' => $fila['id_detalle'],
         'paciente_id' => $fila['paciente_id'],
         'paciente_ci' => $fila['paciente_ci'],
         'paciente' =>  $fila['paciente'],

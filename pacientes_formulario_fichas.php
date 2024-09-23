@@ -31,10 +31,10 @@
                             ?>
                             <input type="text" class="form-control col-md-2" name="nroFicha" id="nroFicha" value="<?php echo $ArrayFicha['nro_ficha'] ?>" readonly>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                             <label for="fechaFicha" class="form-label">Fecha Ficha</label>
                             <input type="date" name="fechaFicha" id="fechaFicha" class="form-control">
-                        </div>
+                        </div> -->
 
                     </div>
                     <div class="row mb-3">
@@ -50,7 +50,13 @@
                                 Datos del Pacientes
                             </label>
                             <input type="text" class="form-control" name="nombres" id="nombres" placeholder="Escribir nombre del paciente" readonly>
-                            <input type="hidden" class="form-control" name="idp" id="idp"><!-- id del paciente -->
+                            <input type="hidden" class="form-control" name="consulta_id" id="consulta_id"><!-- id del paciente -->
+                        </div>
+                        <div class="col">
+                            <label for="edadpaciente" class="form-label">
+                                Edad
+                            </label>
+                            <input type="text" class="form-control" name="edadpaciente" id="edadpaciente" readonly>
                         </div>
                     </div>
 

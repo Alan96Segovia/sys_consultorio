@@ -13,7 +13,7 @@ class Options
     /**
      * The location of a temporary directory.
      *
-     * The directory specified must be writable by the webserver process.
+     * The directory specified must be writeable by the webserver process.
      * The temporary directory is required to download remote images and when
      * using the PFDLib back end.
      *
@@ -47,8 +47,7 @@ class Options
      * dompdf's "chroot"
      *
      * Prevents dompdf from accessing system files or other files on the webserver.
-     * All local files opened by dompdf must be in a subdirectory of this directory
-     * or array of directories.
+     * All local files opened by dompdf must be in a subdirectory of this directory.
      * DO NOT set it to '/' since this could allow an attacker to use dompdf to
      * read any files on the server.  This should be an absolute path.
      *
@@ -58,7 +57,7 @@ class Options
      * documentation is available on the dompdf wiki at:
      * https://github.com/dompdf/dompdf/wiki
      *
-     * @var array
+     * @var string
      */
     private $chroot;
 
@@ -113,7 +112,7 @@ class Options
      * Image DPI setting
      *
      * This setting determines the default DPI setting for images and fonts.  The
-     * DPI may be overridden for inline images by explicitly setting the
+     * DPI may be overridden for inline images by explictly setting the
      * image's width & height style attributes (i.e. if the image's native
      * width is 600 pixels and you specify the image's width as 72 points,
      * the image will have a DPI of 600 in the rendered PDF.  The DPI of
@@ -204,7 +203,7 @@ class Options
      *
      * @var bool
      */
-    private $isFontSubsettingEnabled = true;
+    private $isFontSubsettingEnabled = false;
 
     /**
      * @var bool
@@ -268,7 +267,7 @@ class Options
      *
      * @link http://www.pdflib.com
      *
-     * If pdflib present in web server and auto or selected explicitly above,
+     * If pdflib present in web server and auto or selected explicitely above,
      * a real license code must exist!
      *
      * @var string
@@ -276,17 +275,28 @@ class Options
     private $pdflibLicense = "";
 
     /**
+     * @var string
+     * @deprecated
+     */
+    private $adminUsername = "user";
+
+    /**
+     * @var string
+     * @deprecated
+     */
+    private $adminPassword = "password";
+
+    /**
      * @param array $attributes
      */
     public function __construct(array $attributes = null)
     {
-        $rootDir = realpath(__DIR__ . "/../");
-        $this->setChroot(array($rootDir));
-        $this->setRootDir($rootDir);
+        $this->setChroot(realpath(__DIR__ . "/../"));
+        $this->setRootDir($this->getChroot());
         $this->setTempDir(sys_get_temp_dir());
-        $this->setFontDir($rootDir . "/lib/fonts");
+        $this->setFontDir($this->chroot . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "fonts");
         $this->setFontCache($this->getFontDir());
-        $this->setLogOutputFile($this->getTempDir() . "/log.htm");
+        $this->setLogOutputFile($this->getTempDir() . DIRECTORY_SEPARATOR . "log.htm");
 
         if (null !== $attributes) {
             $this->set($attributes);
@@ -301,7 +311,7 @@ class Options
     public function set($attributes, $value = null)
     {
         if (!is_array($attributes)) {
-            $attributes = [$attributes => $value];
+            $attributes = array($attributes => $value);
         }
         foreach ($attributes as $key => $value) {
             if ($key === 'tempDir' || $key === 'temp_dir') {
@@ -356,6 +366,10 @@ class Options
                 $this->setPdfBackend($value);
             } elseif ($key === 'pdflibLicense' || $key === 'pdflib_license') {
                 $this->setPdflibLicense($value);
+            } elseif ($key === 'adminUsername' || $key === 'admin_username') {
+                $this->setAdminUsername($value);
+            } elseif ($key === 'adminPassword' || $key === 'admin_password') {
+                $this->setAdminPassword($value);
             }
         }
         return $this;
@@ -419,8 +433,48 @@ class Options
             return $this->getPdfBackend();
         } elseif ($key === 'pdflibLicense' || $key === 'pdflib_license') {
             return $this->getPdflibLicense();
+        } elseif ($key === 'adminUsername' || $key === 'admin_username') {
+            return $this->getAdminUsername();
+        } elseif ($key === 'adminPassword' || $key === 'admin_password') {
+            return $this->getAdminPassword();
         }
         return null;
+    }
+
+    /**
+     * @param string $adminPassword
+     * @return $this
+     */
+    public function setAdminPassword($adminPassword)
+    {
+        $this->adminPassword = $adminPassword;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdminPassword()
+    {
+        return $this->adminPassword;
+    }
+
+    /**
+     * @param string $adminUsername
+     * @return $this
+     */
+    public function setAdminUsername($adminUsername)
+    {
+        $this->adminUsername = $adminUsername;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdminUsername()
+    {
+        return $this->adminUsername;
     }
 
     /**
@@ -460,29 +514,21 @@ class Options
     }
 
     /**
-     * @param array|string $chroot
+     * @param string $chroot
      * @return $this
      */
-    public function setChroot($chroot, $delimiter = ',')
+    public function setChroot($chroot)
     {
-        if (is_string($chroot)) {
-            $this->chroot = explode($delimiter, $chroot);
-        } elseif (is_array($chroot)) {
-            $this->chroot = $chroot;
-        }
+        $this->chroot = $chroot;
         return $this;
     }
 
     /**
-     * @return array
+     * @return string
      */
     public function getChroot()
     {
-        $chroot = [];
-        if (is_array($this->chroot)) {
-            $chroot = $this->chroot;
-        }
-        return $chroot;
+        return $this->chroot;
     }
 
     /**

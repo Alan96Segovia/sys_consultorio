@@ -43,7 +43,8 @@ if (!isset($_SESSION['usuario_id'])) {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 themeSystem: 'bootstrap',
-                initialView: 'dayGridMonth',
+                //initialView: 'dayGridMonth',
+                initialView: 'timeGridWeek', // Cambiar la vista inicial
                 locale: 'es',
                 buttonText: {
                     today: 'Hoy' // Personaliza el texto del botón "Today"
@@ -58,6 +59,16 @@ if (!isset($_SESSION['usuario_id'])) {
                 //esta función personaliza la presentación de los eventos en el calendario,
                 // mostrando la hora formateada, el nombre del paciente en negrita y 
                 //el icono del consultorio.
+                allDaySlot: false, // Desactiva la franja horaria de "Todo el día"
+                scrollTime: '05:00:00', // Comenzar a mostrar desde las 05:00
+                slotDuration: '00:30:00', // Duración de cada franja horaria
+                minTime: '05:00:00', // Hora mínima
+                maxTime: '21:00:00', // Hora máxima
+                // Personalización del formato de las etiquetas de hora
+        slotLabelFormat: [
+            { hour: '2-digit', minute: '2-digit', hour12: false, meridiem: false },
+            'numeric'   // Esto asegura que se muestre el "hs" en cada etiqueta
+        ],
                 eventContent: function(info) {
                     //creo variables donde guardo 
                     //lo que viene del array de view_agendemaientos.php
@@ -93,6 +104,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
                     // Accede a los campos específicos
                     var idCabecera = extendedProps.id_cabecera;
+                    var id_detalle = extendedProps.id_detalle;
                     var pacienteId = extendedProps.paciente_id;
                     var pacienteCi = extendedProps.paciente_ci;
                     var paciente = extendedProps.paciente;
@@ -119,6 +131,7 @@ if (!isset($_SESSION['usuario_id'])) {
 
                     $('#start').val(formattedStart);
                     $('#idCabecera').val(idCabecera);
+                    $('#id_detalle').val(id_detalle);
                     $('#plan_descrip').val(plan_descrip);
                     $('#profesional').val(profesional);
                     $('#estado_nombre_cab').val(estado_nombre_cab); //estado de la cabecera
@@ -218,20 +231,34 @@ if (!isset($_SESSION['usuario_id'])) {
                         </div>
                         <div class="modal-body">
                             <!-- Aquí puedes agregar el formulario con los campos que desees -->
-                            <form>
+                            <form method="post" action="agendas.php">
                                 <div class="form-group row">
                                     <div class="col-md-6">
                                         <label for="paciente_nombre">Datos del Paciente:</label>
                                         <input type="text" class="form-control" id="paciente_nombre" readonly>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="profesional">Profesional:</label>
-                                        <input type="text" class="form-control" id="profesional" readonly>
+                                        <label for="id_detalle">Detalle id:</label>
+                                        <input type="text" class="form-control" id="id_detalle" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="estado_nombre">profesionar:</label>
+                                        <select class="form-control" name="idprofesional" id="idprofesional" require>
+                                    <option value="">Elegir Profesional</option>
+                                    <?php
+                                        /**Realizo el query para mostrar el estado del plan */
+                                        $q_profesional = "SELECT * FROM profesionales WHERE estado_id in(5) ORDER BY Profesional_id";
+
+                                        $execute_profesional = pg_query($conexion, $q_profesional);
+                                        while ($fila_profesional = pg_fetch_array($execute_profesional)) { ?>
+                                            <option value="<?php echo $fila_profesional['profesional_id']; ?>" require><?php echo $fila_profesional['profesional_nombre'].' '. $fila_profesional['profesional_apellido']; ?></option>
+                                        <?php } ?>
+                            </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <label for="consultorio_nombre">Consultorio <i id="consultorio_icono"></i></label>
+                                        <label for="consultorio_nombre">Lugar de Sesion <i id="consultorio_icono"></i></label>
                                         <input type="text" class="form-control" id="consultorio_nombre" readonly>
 
                                     </div>
@@ -259,16 +286,30 @@ if (!isset($_SESSION['usuario_id'])) {
                                     </div>
                                     <div class="col-md-6">
                                         <label for="estado_nombre">Estado de la Sesion:</label>
-                                        <input type="text" class="form-control" id="estado_nombre" readonly>
+                                        <select class="form-control" name="Editestado_id" id="Editestado_id" require>
+                                    <option value="">Elegir Estado</option>
+                                    <?php 
+                                    $q_estado = 'select * from estados where estado_id not in (5,6)';
+                                    $execute_estado = pg_query($conexion,$q_estado);
+                                    while ($row_estado = pg_fetch_array($execute_estado)) {
+                                        $selected = ($row_estado['estado_id'] == 5) ? 'selected' : '';
+                                    ?>
+                                        <option value="<?php echo $row_estado['estado_id']; ?>" <?php echo $selected; ?>>
+                                            <?php echo $row_estado['estado_nombre']; ?>
+                                        </option>
+                                    <?php } ?>
+                            </select>
                                     </div>
                                 </div>
                         </div>
                         <!-- Agrega más campos según sea necesario -->
-                        </form>
+                       
                         <div class="modal-footer">
+                            <button type="submit" class="btn btn-info" data-dismiss="modal">Editar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <!-- Puedes agregar botones adicionales aquí si es necesario -->
                         </div>
+                        </form>
                     </div>
 
                 </div>

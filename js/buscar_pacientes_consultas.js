@@ -3,7 +3,7 @@ $(document).ready(function () {
   
     $("#Paciente_cedula").on("input", function () {
       var Paciente_cedula = $(this).val();
-  
+      //console.log(Paciente_cedula);
       //realizar peticion ajax
       $.ajax({
         type: "POST",
@@ -11,9 +11,11 @@ $(document).ready(function () {
         data: { Paciente_cedula: Paciente_cedula },
         success: function (response) {
           var datos = JSON.parse(response);
-          
-          $("#idp").val(datos.paciente_id);
-          $("#nombres").val(datos.nombres);
+          //console.log(datos)
+          $("#consulta_id").val(datos.consulta_id);
+          $("#nombres").val(datos.nombre_paciente);
+          $("#MotivoConsulta").val(datos.consulta_motivo);
+          $("#edadpaciente").val(datos.edad);
           $("#fecha_nac").val(datos.fecha_nac);
         },
         error: function () {

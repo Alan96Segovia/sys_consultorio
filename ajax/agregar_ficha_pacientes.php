@@ -3,8 +3,8 @@ include('../clases/conexion.php');
 //recibo los campos del formulario pacientes_formulario_fichas.php
 
 $nroFicha = $_POST['nroFicha'];
-$fechaFicha = date('d/m/y',strtotime($_POST['fechaFicha']));
-$idp = $_POST['idp']; //id del paciente
+$fechaFicha = date("Y/m/d");
+$consulta_id = $_POST['consulta_id']; //id del paciente
 $Medicotratante = $_POST['Medicotratante'];
 $DiagnosticoM = $_POST['DiagnosticoM'];//diagnostico medico
 $MotivoConsulta = $_POST['MotivoConsulta'];// motivo de consulta    
@@ -45,7 +45,7 @@ factores_comportamentales,
 factores_sociales,
 motivacion,
 estado_id)
-VALUES ($idp,
+VALUES ($consulta_id,
 '$fechaFicha',
 '$Medicotratante',
 '$DiagnosticoM',
@@ -75,7 +75,7 @@ if($insert){
     $error_message = pg_last_error($conexion);
 
     // muestro mi mensahe de error
-    echo "error: " . $error_message;
+    echo "error: " . $query_insert;
 }
 
 

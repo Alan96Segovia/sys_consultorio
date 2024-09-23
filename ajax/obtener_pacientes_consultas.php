@@ -6,8 +6,8 @@ if(isset($_POST['Paciente_cedula'])){
 
 
     ///realiza query de consulta - tabla pacientes
-    $query="SELECT paciente_id ,paciente_ci, nombres   
-            FROM view_consultas WHERE paciente_ci = '$ci' ";
+    $query="SELECT *   
+            FROM view_pacientes WHERE cedula = '$ci' ";
     $res_query = pg_query($conexion, $query);
 
     $cant = pg_num_rows($res_query);
@@ -15,8 +15,10 @@ if(isset($_POST['Paciente_cedula'])){
     if($cant > 0){
         $fila = pg_fetch_assoc($res_query);
         $datos=array(
-            'paciente_id' => $fila['paciente_id'],
-            'nombres' => $fila['nombres']
+            'consulta_id' => $fila['consulta_id'],
+            'nombre_paciente' => $fila['nombre_paciente'],
+            'edad' => $fila['edad'],
+            'consulta_motivo' => $fila['consulta_motivo'],
 
         );
         echo json_encode($datos);

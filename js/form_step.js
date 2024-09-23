@@ -78,6 +78,7 @@ $(document).ready(function () {
   $("#formularioEditFicha").submit(function (e) {
     e.preventDefault(); //evita recargar la pagina
     //console.log($('#formularioEditFicha').serialize());
+    //alert('hola')
     $.ajax({
       type: "POST",
       url: "ajax/edit_ficha_pacientes.php",
@@ -87,18 +88,34 @@ $(document).ready(function () {
         var mensajesContainerEdit = $("#mensajesContainerEdit");
 
         if (response === "success") {
+          /*console.log(response)
           mensajesContainerEdit
             .removeClass()
             .addClass("alert alert-info")
-            .text("Se Actualizo La Ficha Con Exito" + response);
-          setTimeout(function () {
+            .text("Se Actualizo La Ficha Con Exito" );
+          /*setTimeout(function () {
             location.reload();
-          }, 2000);
-        } else {
+          }, 2000);*/
+          Swal.fire({
+            icon: "success",
+            title: "¡Éxito!",
+            text: "Ficha Actaulizada con éxito.",
+          }).then((result) => {
+            // Si el usuario hace clic en "OK", puedes realizar alguna acción adicional
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          });
+        } else { /*
           mensajesContainerEdit
             .removeClass()
             .addClass("alert alert-warning")
-            .text("Erro al Actualizar. Intentar de nuevo" + response);
+            .text("Erro al Actualizar. Intentar de nuevo" + response);*/
+            Swal.fire({
+              icon: "error",
+              title: "¡Error!",
+              text: "Error al crear la ficha. Inténtalo de nuevo.\n" + response,
+            });
         }
       },
       error: function () {

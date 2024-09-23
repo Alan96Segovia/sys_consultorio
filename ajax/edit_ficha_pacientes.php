@@ -5,7 +5,7 @@ include('../clases/conexion.php');
 
 $ficha_id = $_POST['Editid'];
 $nroFicha = $_POST['EditnroFicha'];
-$fechaFicha = $_POST['EditfechaFicha'];
+//$fechaFicha = $_POST['EditfechaFicha'];
 $idp = $_POST['Editidp']; //id del paciente
 $Medicotratante = $_POST['EditMedicotratante'];
 $DiagnosticoM = $_POST['EditDiagnosticoM'];//diagnostico medico
@@ -27,11 +27,10 @@ $Editestado_id = $_POST['Editestado_id'];
 
 //echo 'post'.print_r($__POST);
 //query para actualizar 
-$query_update = "UPDATE 
+ $query_update = "UPDATE 
 pacientes_fichas 
 SET 
 paciente_id =$idp,
-paciente_ficha_fecha ='$fechaFicha',
 medico_tratante = '$Medicotratante',
 diagnostico_medico = '$DiagnosticoM',
 motivo_consulta = '$MotivoConsulta',

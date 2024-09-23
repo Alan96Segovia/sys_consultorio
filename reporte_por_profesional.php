@@ -64,20 +64,29 @@ if (!isset($_SESSION['usuario_id'])) {
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="reporte_mensual_anual_primera_consulta.php" method="post" name="Rpt_mensual_anual" autocomplete="off">
+                            <form action="reporte_por_profesional.php" method="post" name="Rpt_mensual_anual" autocomplete="off">
 
                                 <div class="card-body">
                                 <div class="form-group">
                                         <label for="ci">Cedula Profesional</label>
-                                        <input type="number" min="0" class="form-control" name='ci' id="ci" placeholder="ingresar Nro cedula del Profesional ">
+                                        <select class="form-control" name="profesional" id="profesional" require>
+                                            <option value="">Seleccionar Profesional</option>
+                                            <?php 
+                                                $q_profesionales = 'select * from profesionales';
+                                                $execute_profesionales = pg_query($conexion,$q_profesionales);
+                                                while($row_profesional = pg_fetch_array($execute_profesionales)){
+                                                ?>
+                                                <option value="<?php echo $row_profesional['profesional_id'] ?>"><?php echo $row_profesional['profesional_nombre'].' '.$row_profesional['profesional_apellido'] ;?></option>
+                                                <?php } ?> 
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="year">Año</label>
-                                        <input type="number" min="0" class="form-control" name='year' id="year" placeholder="ingresar Año ">
+                                        <input type="number" min="0" class="form-control" name='year' id="year" value="2024" placeholder="ingresar Año " require>
                                     </div>
                                     <div class="form-group">
                                         <label for="mes">Seleccionar Mes</label>
-                                        <select class="form-control" name="mes" id="mes">
+                                        <select class="form-control" name="mes" id="mes" require>
                                             <option value="">Seleccionar Mes</option>
                                             <option value="1">Enero</option>
                                             <option value="2">Febrero</option>
@@ -109,15 +118,8 @@ if (!isset($_SESSION['usuario_id'])) {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') { //pregunto si se realizo el post
                         $mes = $_POST['mes'];
                         $year = $_POST['year'];
-
-                        $query;
-
-                        if(empty($mes) and empty($year)){
-                            $query = "SELECT * FROM view_consultas  ORDER BY mes, anho";
-                        }else{
-                            $query = "SELECT * FROM view_consultas WHERE mes= $mes and anho = $year   ORDER BY mes, anho";
-
-                        }
+                        $profesional = $_POST['profesional'];
+                        $query = "SELECT * FROM view_profesionales WHERE mes::integer= '$mes' and anho = '$year' and profesional_id = $profesional   ORDER BY mes, anho";
 
                         $query_view_consultas = $query;
                         $execute_query = pg_query($conexion, $query_view_consultas);
@@ -135,13 +137,11 @@ if (!isset($_SESSION['usuario_id'])) {
                                         </tr>
                                         <tr>
                                             <td>Nro</td>
-                                            <td>Cedula</td>
-                                            <td>Paciente</td>
-                                            <td>Fecha Consulta</td>
-                                            <td>Mes - Año</td>
-                                            <td>Motivo Consulta</td>
-                                            <td>Monto Consulta</td>
-                                        </tr>
+                                            <td>PROFESIONAL</td>
+                                            <td>PACIENTE</td>
+                                            <td>FECHA CONSULTA</td>
+                                            <td>MES - AÑO</td>
+                                            <td>TIPO DE PLAN</td>                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -149,12 +149,11 @@ if (!isset($_SESSION['usuario_id'])) {
                                         while ($fila = pg_fetch_array($execute_query)) { ?>
                                             <tr>
                                                 <td><?php echo $i++ ?></td>
-                                                <td><?php echo $fila['paciente_ci']; ?></td>
-                                                <td><?php echo $fila['nombres']; ?></td>
-                                                <td><?php echo date('d/m/Y', strtotime($fila['fecha_consulta'])); ?></td>
+                                                <td><?php echo $fila['profesional']; ?></td>
+                                                <td><?php echo $fila['paciente']; ?></td>
+                                                <td><?php echo date('d/m/Y', strtotime($fila['fecha_session'])); ?></td>
                                                 <td><?php echo nombre_mes($fila['mes']) . ' ' . $fila['anho']; ?></td>
-                                                <td><?php echo $fila['consulta_motivo']; ?></td>
-                                                <td><?php echo $fila['monto_consulta']; ?></td>
+                                                <td><?php echo $fila['plan_descrip']; ?></td>
                                             </tr>
                                         <?php } //cierro mi ciclo while 
                                         ?>
