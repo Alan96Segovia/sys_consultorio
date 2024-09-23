@@ -60,9 +60,9 @@ if (!isset($_SESSION['usuario_id'])) {
                 // mostrando la hora formateada, el nombre del paciente en negrita y 
                 //el icono del consultorio.
                 allDaySlot: false, // Desactiva la franja horaria de "Todo el día"
-                scrollTime: '05:00:00', // Comenzar a mostrar desde las 05:00
+                scrollTime: '07:00:00', // Comenzar a mostrar desde 
                 slotDuration: '00:30:00', // Duración de cada franja horaria
-                minTime: '05:00:00', // Hora mínima
+                minTime: '07:00:00', // Hora mínima
                 maxTime: '21:00:00', // Hora máxima
                 // Personalización del formato de las etiquetas de hora
         slotLabelFormat: [
